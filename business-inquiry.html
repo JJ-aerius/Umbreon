@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Umbreon for business inquiries and partnership opportunities.">
+  <title>Business Inquiry - Umbreon</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="header-placeholder"></div>
+  
+  <main id="main-content" style="padding-top: 6rem;">
+    <section class="section">
+      <div class="container" style="max-width: 800px;">
+        <h1 class="text-center mb-3">Business Inquiry</h1>
+        <p class="text-center mb-4" style="color: var(--muted); font-size: 1.125rem;">
+          Interested in partnering with Umbreon or deploying our technology? We'd love to hear from you.
+        </p>
+        
+        <!-- Trust Badges -->
+        <div class="grid grid-3 mb-4">
+          <div class="text-center">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇨🇭</div>
+            <p style="color: var(--muted); font-size: 0.9rem;">Swiss Quality</p>
+          </div>
+          <div class="text-center">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">✅</div>
+            <p style="color: var(--muted); font-size: 0.9rem;">Certified Systems</p>
+          </div>
+          <div class="text-center">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
+            <p style="color: var(--muted); font-size: 0.9rem;">Trusted Partner</p>
+          </div>
+        </div>
+        
+        <!-- Form -->
+        <form class="card" data-formspree>
+          <div class="form-group">
+            <label for="name" class="form-label required">Name</label>
+            <input type="text" id="name" name="name" class="form-input" required>
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="company" class="form-label required">Company</label>
+            <input type="text" id="company" name="company" class="form-input" required>
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label required">Email</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="tel" id="phone" name="phone" class="form-input">
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="project-type" class="form-label required">Project Type</label>
+            <select id="project-type" name="project_type" class="form-select" required>
+              <option value="">Select a project type</option>
+              <option value="emergency-response">Emergency Response</option>
+              <option value="inspection">Inspection</option>
+              <option value="logistics">Logistics</option>
+              <option value="research">Research</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="timeline" class="form-label required">Timeline</label>
+            <select id="timeline" name="timeline" class="form-select" required>
+              <option value="">Select a timeline</option>
+              <option value="immediate">Immediate</option>
+              <option value="1-3-months">1–3 months</option>
+              <option value="3-6-months">3–6 months</option>
+              <option value="6-months-plus">&gt;6 months</option>
+            </select>
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="form-label required">Message</label>
+            <textarea id="message" name="message" class="form-textarea" minlength="20" required placeholder="Please describe your project requirements (minimum 20 characters)"></textarea>
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <div class="form-group">
+            <div class="form-checkbox-group">
+              <input type="checkbox" id="consent" name="consent" class="form-checkbox" required>
+              <label for="consent" class="form-checkbox-label">
+                I consent to Umbreon storing my information and contacting me regarding this inquiry. *
+              </label>
+            </div>
+            <div class="form-error" role="alert" aria-live="polite"></div>
+          </div>
+          
+          <!-- Honeypot -->
+          <div class="honeypot">
+            <input type="text" name="_honeypot" tabindex="-1" autocomplete="off">
+          </div>
+          
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  
+  <div id="footer-placeholder"></div>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
