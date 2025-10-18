@@ -195,9 +195,6 @@ Copyright © 2025 Umbreon. All rights reserved.
 
 ## 🤝 Contact
 
-For questions or support:
-- Email: hello@umbreon.com
-- Website: [umbreon.com](https://umbreon.com)
 
 ---
 
