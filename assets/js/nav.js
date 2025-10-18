@@ -20,7 +20,6 @@
   function init() {
     // Prevent double initialization
     if (initialized) {
-      console.log('Navigation already initialized, skipping');
       return;
     }
     
@@ -30,7 +29,6 @@
     navOverlay = document.querySelector('.nav-overlay');
     
     if (!hamburger || !navMobile || !navOverlay) {
-      console.log('Navigation elements not found, waiting for partials...');
       return;
     }
     
@@ -179,17 +177,14 @@
   // Initialize when partials are loaded
   function tryInit() {
     const testHamburger = document.querySelector('.hamburger');
-    console.log('tryInit called, hamburger found:', !!testHamburger);
     
     if (testHamburger) {
       init();
     } else {
       // Wait for partials to load with both event and polling fallback
-      console.log('Waiting for hamburger menu...');
       
       // Method 1: Listen for custom event
       document.addEventListener('partialsLoaded', () => {
-        console.log('partialsLoaded event received');
         const hamburger = document.querySelector('.hamburger');
         if (hamburger) {
           init();
@@ -201,7 +196,6 @@
       const pollInterval = setInterval(() => {
         attempts++;
         const hamburger = document.querySelector('.hamburger');
-        console.log('Polling attempt', attempts, 'hamburger found:', !!hamburger);
         
         if (hamburger) {
           clearInterval(pollInterval);
@@ -209,7 +203,6 @@
         } else if (attempts > 20) {
           // Stop after 2 seconds (20 * 100ms)
           clearInterval(pollInterval);
-          console.error('Could not find navigation elements');
         }
       }, 100);
     }
