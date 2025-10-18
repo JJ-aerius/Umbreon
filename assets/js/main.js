@@ -4,7 +4,11 @@
  */
 
 // Formspree endpoint configuration
-const FORMSPREE_ENDPOINT = ""; // Set to your Formspree endpoint URL
+const FORMSPREE_ENDPOINTS = {
+  business: "https://formspree.io/f/xdkwbqkz",
+  careers: "https://formspree.io/f/mblzwnld",
+  investors: "https://formspree.io/f/mldpzqdp"
+};
 
 // Speed Intelligence Data
 const SPEED_DATA = {
@@ -187,8 +191,12 @@ const SPEED_DATA = {
     const forms = document.querySelectorAll('form[data-formspree]');
     
     forms.forEach(form => {
+      // Get the form type from data attribute
+      const formType = form.getAttribute('data-formspree');
+      const endpoint = FORMSPREE_ENDPOINTS[formType];
+      
       // Check if endpoint is set
-      if (!FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT === "") {
+      if (!endpoint || endpoint === "") {
         const submitBtn = form.querySelector('button[type="submit"]');
         if (submitBtn) {
           submitBtn.disabled = true;
@@ -241,7 +249,7 @@ const SPEED_DATA = {
 
         try {
           const formData = new FormData(form);
-          const response = await fetch(FORMSPREE_ENDPOINT, {
+          const response = await fetch(endpoint, {
             method: 'POST',
             body: formData,
             headers: {
