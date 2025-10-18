@@ -1,27 +1,33 @@
 /* ===== Design System Variables ===== */
 :root {
-  /* Colors */
-  --bg: #0a1024;
-  --bg-2: #0e1633;
-  --text: #e8ecff;
-  --muted: #a8b2d1;
-  --accent: #4da3ff;
-  --accent-2: #5fe1ff;
-  --border: #1e2a55;
+  /* Colors - SpaceX/Rocket Lab/Palantir inspired */
+  --bg: #000000;
+  --bg-2: #0a0a0a;
+  --bg-card: #0d0d0d;
+  --text: #ffffff;
+  --text-dim: #b0b0b0;
+  --muted: #808080;
+  --accent: #0ea5e9;
+  --accent-dark: #0284c7;
+  --accent-2: #38bdf8;
+  --accent-glow: rgba(14, 165, 233, 0.3);
+  --border: #1a1a1a;
+  --border-bright: #2a2a2a;
   
   /* Typography */
-  --font-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', monospace;
   
   /* Spacing */
   --container-max: 1200px;
   --section-padding: clamp(3rem, 6vw, 6rem);
   
-  /* Borders */
-  --radius: 16px;
-  --radius-sm: 8px;
+  /* Borders - Sharper, more geometric */
+  --radius: 4px;
+  --radius-sm: 2px;
   
   /* Transitions */
-  --transition: 0.3s ease;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Respect reduced motion preferences */
@@ -41,13 +47,16 @@ body {
   font-family: var(--font-base);
   font-size: clamp(1rem, 1vw + 0.5rem, 1.125rem);
   line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 /* ===== Typography ===== */
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
-  font-weight: 600;
+  line-height: 1.1;
+  font-weight: 700;
   color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 h1 {
@@ -57,26 +66,31 @@ h1 {
 
 h2 {
   font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
 }
 
 h3 {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
 }
 
 h4 {
   font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
 }
 
 h5 {
   font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 600;
 }
 
 h6 {
   font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 600;
 }
 
 p {
-  color: var(--muted);
+  color: var(--text-dim);
   margin-bottom: 1rem;
 }
 
@@ -143,8 +157,8 @@ a:hover {
   position: absolute;
   top: -100px;
   left: 0;
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--accent-dark);
+  color: #fff;
   padding: 0.75rem 1.5rem;
   font-weight: 600;
   z-index: 10000;
@@ -164,12 +178,14 @@ a:hover {
   z-index: 1000;
   transition: background-color var(--transition), backdrop-filter var(--transition);
   padding: 1rem 0;
+  border-bottom: 1px solid transparent;
 }
 
 .site-header.scrolled {
-  background-color: rgba(10, 16, 36, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .header-container {
@@ -181,8 +197,9 @@ a:hover {
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   color: var(--text);
+  text-transform: uppercase;
 }
 
 .nav-desktop {
@@ -201,9 +218,28 @@ a:hover {
 
 .nav-link {
   font-weight: 500;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   transition: color var(--transition);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after,
+.nav-link[aria-current="page"]::after {
+  width: 100%;
 }
 
 .nav-link:hover,
@@ -217,10 +253,19 @@ a:hover {
   position: relative;
 }
 
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-direction: row;
+  white-space: nowrap;
+}
+
 .nav-dropdown-toggle::after {
   content: '▾';
-  margin-left: 0.3rem;
   font-size: 0.8em;
+  line-height: 1;
+  display: inline-block;
 }
 
 .nav-submenu {
@@ -258,7 +303,7 @@ a:hover {
 }
 
 .nav-submenu-link:hover {
-  color: var(--text);
+  color: var(--accent);
 }
 
 /* Mobile Menu */
@@ -407,38 +452,55 @@ body.nav-open {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  padding: 1rem 2rem;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   border-radius: var(--radius-sm);
   transition: all var(--transition);
   cursor: pointer;
   text-align: center;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.btn:hover::before {
+  transform: translateX(100%);
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--accent-dark);
+  color: #fff;
+  border-color: var(--accent-dark);
 }
 
 .btn-primary:hover {
-  background: var(--accent-2);
-  color: var(--bg);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(77, 163, 255, 0.3);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
 }
 
 .btn-secondary {
   background: transparent;
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--accent-dark);
+  color: var(--accent-dark);
 }
 
 .btn-secondary:hover {
-  background: var(--accent);
-  color: var(--bg);
-  transform: translateY(-2px);
+  background: var(--accent-dark);
+  color: #fff;
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .btn:disabled {
@@ -449,24 +511,45 @@ body.nav-open {
 
 /* ===== Cards ===== */
 .card {
-  background: var(--bg-2);
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: clamp(1.5rem, 3vw, 2.5rem);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: all var(--transition);
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent) 0%, transparent 50%, var(--accent) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.card:hover::before {
+  opacity: 0.5;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: var(--border-bright);
+  box-shadow: 0 0 30px rgba(0, 168, 255, 0.1);
 }
 
 .card-title {
   margin-bottom: 0.75rem;
+  color: var(--text);
 }
 
 .card-content {
-  color: var(--muted);
+  color: var(--text-dim);
 }
 
 /* ===== Hero Section ===== */
@@ -486,7 +569,7 @@ body.nav-open {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--bg) 0%, #1a2540 50%, var(--bg) 100%);
+  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 100%);
   z-index: 0;
 }
 
@@ -637,7 +720,7 @@ body.nav-open {
 
 /* ===== Footer ===== */
 .site-footer {
-  background: var(--bg-2);
+  background: var(--bg);
   border-top: 1px solid var(--border);
   padding: 3rem 0 1.5rem;
   margin-top: 4rem;
@@ -651,15 +734,23 @@ body.nav-open {
 
 .footer-brand h3 {
   margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
 }
 
 .footer-brand p {
   font-size: 0.9rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .footer-links h4 {
   margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-weight: 700;
 }
 
 .footer-links ul {
@@ -671,6 +762,11 @@ body.nav-open {
 .footer-links a {
   color: var(--muted);
   font-size: 0.9rem;
+  transition: color var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--accent);
 }
 
 .footer-social {
@@ -685,16 +781,16 @@ body.nav-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-sm);
   transition: all var(--transition);
 }
 
 .social-link:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 15px var(--accent-glow);
 }
 
 .footer-bottom {
@@ -707,10 +803,17 @@ body.nav-open {
   gap: 1rem;
   font-size: 0.875rem;
   color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .footer-bottom a {
   color: var(--muted);
+  transition: color var(--transition);
+}
+
+.footer-bottom a:hover {
+  color: var(--accent);
 }
 
 @media (min-width: 768px) {
@@ -745,13 +848,13 @@ body.nav-open {
 }
 
 .speed-tab.active {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
+  background: var(--accent-dark);
+  color: #fff;
+  border-color: var(--accent-dark);
 }
 
 .speed-tab:hover:not(.active) {
-  border-color: var(--accent);
+  border-color: var(--accent-dark);
   color: var(--text);
 }
 
@@ -800,19 +903,19 @@ body.nav-open {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-dark);
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(77, 163, 255, 0.5);
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.5);
 }
 
 .speed-slider::-moz-range-thumb {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-dark);
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 10px rgba(77, 163, 255, 0.5);
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.5);
 }
 
 .speed-result {
@@ -873,8 +976,8 @@ body.nav-open {
   position: absolute;
   top: -2.5rem;
   right: 0;
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--accent-dark);
+  color: #fff;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -914,7 +1017,7 @@ body.nav-open {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent-dark);
   border: 2px solid var(--bg);
 }
 
