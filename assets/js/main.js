@@ -204,7 +204,8 @@ const SPEED_DATA = {
         
         const notice = document.createElement('div');
         notice.className = 'form-notice warning';
-        notice.innerHTML = '<p><strong>Note:</strong> Form temporarily unavailable—please email us at <a href="mailto:hello@umbreon.com">hello@umbreon.com</a></p>';
+        notice.innerHTML = '<p><strong>Note:</strong> Form temporarily unavailable—please check back later.</p>';
+        // notice.innerHTML = '<p><strong>Note:</strong> Form temporarily unavailable—please email us at <a href="mailto:hello@umbreon.com">hello@umbreon.com</a></p>';
         form.insertBefore(notice, form.firstChild);
         return;
       }
