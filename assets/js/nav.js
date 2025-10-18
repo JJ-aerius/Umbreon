@@ -6,18 +6,36 @@
 (function() {
   'use strict';
 
-  const hamburger = document.querySelector('.hamburger');
-  const navMobile = document.querySelector('.nav-mobile');
-  const navOverlay = document.querySelector('.nav-overlay');
+  let hamburger = null;
+  let navMobile = null;
+  let navOverlay = null;
   const body = document.body;
   
   let focusableElements = [];
   let firstFocusable = null;
   let lastFocusable = null;
+  let initialized = false;
 
   // Initialize navigation
   function init() {
-    if (!hamburger || !navMobile) return;
+    // Prevent double initialization
+    if (initialized) {
+      console.log('Navigation already initialized, skipping');
+      return;
+    }
+    
+    // Query elements fresh on init
+    hamburger = document.querySelector('.hamburger');
+    navMobile = document.querySelector('.nav-mobile');
+    navOverlay = document.querySelector('.nav-overlay');
+    
+    if (!hamburger || !navMobile || !navOverlay) {
+      console.log('Navigation elements not found, waiting for partials...');
+      return;
+    }
+    
+    initialized = true;
+    console.log('Navigation initialized successfully');
     
     // Hamburger click
     hamburger.addEventListener('click', toggleMobileMenu);
@@ -158,10 +176,49 @@
     toggle.setAttribute('aria-expanded', !isExpanded);
   }
 
-  // Initialize when DOM is ready
+  // Initialize when partials are loaded
+  function tryInit() {
+    const testHamburger = document.querySelector('.hamburger');
+    console.log('tryInit called, hamburger found:', !!testHamburger);
+    
+    if (testHamburger) {
+      init();
+    } else {
+      // Wait for partials to load with both event and polling fallback
+      console.log('Waiting for hamburger menu...');
+      
+      // Method 1: Listen for custom event
+      document.addEventListener('partialsLoaded', () => {
+        console.log('partialsLoaded event received');
+        const hamburger = document.querySelector('.hamburger');
+        if (hamburger) {
+          init();
+        }
+      }, { once: true });
+      
+      // Method 2: Poll for element (fallback)
+      let attempts = 0;
+      const pollInterval = setInterval(() => {
+        attempts++;
+        const hamburger = document.querySelector('.hamburger');
+        console.log('Polling attempt', attempts, 'hamburger found:', !!hamburger);
+        
+        if (hamburger) {
+          clearInterval(pollInterval);
+          init();
+        } else if (attempts > 20) {
+          // Stop after 2 seconds (20 * 100ms)
+          clearInterval(pollInterval);
+          console.error('Could not find navigation elements');
+        }
+      }, 100);
+    }
+  }
+
+  // Start initialization when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', tryInit);
   } else {
-    init();
+    tryInit();
   }
 })();

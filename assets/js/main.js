@@ -89,25 +89,26 @@ const SPEED_DATA = {
       // Inject header
       const headerPlaceholder = document.getElementById('header-placeholder');
       if (headerPlaceholder) {
+        console.log('Injecting header...');
         const headerResponse = await fetch('partials/header.html');
         const headerHTML = await headerResponse.text();
         headerPlaceholder.outerHTML = headerHTML;
+        console.log('Header injected');
       }
 
       // Inject footer
       const footerPlaceholder = document.getElementById('footer-placeholder');
       if (footerPlaceholder) {
+        console.log('Injecting footer...');
         const footerResponse = await fetch('partials/footer.html');
         const footerHTML = await footerResponse.text();
         footerPlaceholder.outerHTML = footerHTML;
+        console.log('Footer injected');
       }
 
-      // Re-initialize nav after injection
-      if (window.location.pathname.includes('.html') || window.location.pathname === '/') {
-        const navScript = document.createElement('script');
-        navScript.src = 'assets/js/nav.js';
-        document.body.appendChild(navScript);
-      }
+      // Dispatch event to signal partials are loaded
+      console.log('Dispatching partialsLoaded event');
+      document.dispatchEvent(new CustomEvent('partialsLoaded'));
     } catch (error) {
       console.error('Error loading partials:', error);
     }
@@ -189,11 +190,13 @@ const SPEED_DATA = {
   // ===== Form Handling =====
   function initForms() {
     const forms = document.querySelectorAll('form[data-formspree]');
+    console.log('Initializing forms:', forms.length);
     
     forms.forEach(form => {
       // Get the form type from data attribute
       const formType = form.getAttribute('data-formspree');
       const endpoint = FORMSPREE_ENDPOINTS[formType];
+      console.log('Form type:', formType, 'Endpoint:', endpoint);
       
       // Check if endpoint is set
       if (!endpoint || endpoint === "") {
@@ -210,10 +213,17 @@ const SPEED_DATA = {
         return;
       }
 
-      // Real-time validation
-      const inputs = form.querySelectorAll('input, textarea, select');
+      // Real-time validation - only clear errors on input if field has error
+      const inputs = form.querySelectorAll('input:not([type="hidden"]), textarea, select');
       inputs.forEach(input => {
-        input.addEventListener('blur', () => validateField(input));
+        // Only validate on blur if the field has been interacted with
+        input.addEventListener('blur', () => {
+          if (input.value.trim() || input.classList.contains('error')) {
+            validateField(input);
+          }
+        });
+        
+        // Clear errors as user types
         input.addEventListener('input', () => {
           if (input.classList.contains('error')) {
             validateField(input);
@@ -278,31 +288,38 @@ const SPEED_DATA = {
     let isValid = true;
     let errorMessage = '';
 
-    // Required check
-    if (field.hasAttribute('required') && !field.value.trim()) {
+    // Checkbox validation
+    if (field.type === 'checkbox') {
+      if (field.hasAttribute('required') && !field.checked) {
+        isValid = false;
+        errorMessage = 'This field is required';
+      }
+    }
+    // Required check for other fields
+    else if (field.hasAttribute('required') && !field.value.trim()) {
       isValid = false;
       errorMessage = 'This field is required';
     }
     // Email check
-    else if (field.type === 'email' && field.value) {
+    else if (field.type === 'email' && field.value.trim()) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(field.value)) {
+      if (!emailRegex.test(field.value.trim())) {
         isValid = false;
         errorMessage = 'Please enter a valid email address';
       }
     }
     // Min length check
-    else if (field.hasAttribute('minlength')) {
+    else if (field.hasAttribute('minlength') && field.value.trim()) {
       const minLength = parseInt(field.getAttribute('minlength'));
-      if (field.value.length < minLength) {
+      if (field.value.trim().length < minLength) {
         isValid = false;
         errorMessage = `Minimum ${minLength} characters required`;
       }
     }
     // URL check
-    else if (field.type === 'url' && field.value) {
+    else if (field.type === 'url' && field.value.trim()) {
       try {
-        new URL(field.value);
+        new URL(field.value.trim());
       } catch {
         isValid = false;
         errorMessage = 'Please enter a valid URL';
