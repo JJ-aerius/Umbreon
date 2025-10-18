@@ -236,6 +236,19 @@ a:hover {
   transition: width var(--transition);
 }
 
+/* Prevent the underline ::after on dropdown toggle */
+.nav-dropdown-toggle::after {
+  content: '▾';
+  position: static;
+  font-size: 0.8em;
+  line-height: 1;
+  display: inline-block;
+  margin-left: 0.3rem;
+  width: auto;
+  height: auto;
+  background: none;
+}
+
 .nav-link:hover::after,
 .nav-link.active::after,
 .nav-link[aria-current="page"]::after {
@@ -256,16 +269,8 @@ a:hover {
 .nav-dropdown-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
   flex-direction: row;
   white-space: nowrap;
-}
-
-.nav-dropdown-toggle::after {
-  content: '▾';
-  font-size: 0.8em;
-  line-height: 1;
-  display: inline-block;
 }
 
 .nav-submenu {
