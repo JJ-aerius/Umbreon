@@ -5,9 +5,9 @@
 
 // Formspree endpoint configuration
 const FORMSPREE_ENDPOINTS = {
-  business: "https://formspree.io/f/xdkwbqkz",
-  careers: "https://formspree.io/f/mblzwnld",
-  investors: "https://formspree.io/f/mldpzqdp"
+  business: "INSERT_FORMSPREE_LINK_HERE",
+  careers: "INSERT_FORMSPREE_LINK_HERE",
+  investors: "INSERT_FORMSPREE_LINK_HERE"
 };
 
 // Speed Intelligence Data

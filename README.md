@@ -10,7 +10,7 @@ A modern, fully responsive static website built with HTML, CSS, and vanilla Java
 - **Interactive Speed Intelligence Module**: Dynamic data visualization with speed calculator
 - **Accessible**: WCAG AA compliant with keyboard navigation, focus management, and screen reader support
 - **Performance Optimized**: Lazy loading, minimal dependencies, lightweight codebase
-- **Form Integration**: Ready for Formspree integration with client-side validation
+- **Form Integration**: Ready for form endpoint integration with client-side validation
 
 ## 📁 Project Structure
 
@@ -105,16 +105,20 @@ Edit the shared header and footer in one place:
 
 Changes automatically apply to all pages via JavaScript injection.
 
-### Enabling Forms (Formspree)
-1. Sign up at [Formspree.io](https://formspree.io)
+### Enabling Forms (Form Backend)
+1. Set up your form backend service (e.g., Formspree, Netlify Forms, custom API)
 2. Create a form endpoint
 3. Open `assets/js/main.js`
-4. Replace the empty string with your endpoint:
+4. Replace the placeholder text with your actual endpoints:
    ```javascript
-   const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+   const FORMSPREE_ENDPOINTS = {
+     business: "INSERT_FORMSPREE_LINK_HERE",
+     careers: "INSERT_FORMSPREE_LINK_HERE",
+     investors: "INSERT_FORMSPREE_LINK_HERE"
+   };
    ```
 
-All three forms (Business Inquiry, Careers, Investors) will use this endpoint. Form data includes a field identifying which form was submitted.
+Each form (Business Inquiry, Careers, Investors) uses its own dedicated endpoint identified by the `data-formspree` attribute.
 
 ### Editing Speed Intelligence Data
 The speed bands, aircraft references, and drone data are stored as a JavaScript object in `assets/js/main.js`:

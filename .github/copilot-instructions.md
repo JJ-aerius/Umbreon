@@ -13,12 +13,12 @@ The site uses client-side HTML injection for shared components:
 - **Critical:** All HTML files must include both placeholder divs and load `main.js` before closing `</body>`
 
 ### Multi-Endpoint Form System
-Forms use a **specific Formspree endpoint per form type** (not a single shared endpoint):
+Forms use a **specific endpoint per form type** (not a single shared endpoint):
 ```javascript
 const FORMSPREE_ENDPOINTS = {
-  business: "https://formspree.io/f/xdkwbqkz",
-  careers: "https://formspree.io/f/mblzwnld",
-  investors: "https://formspree.io/f/mldpzqdp"
+  business: "INSERT_FORMSPREE_LINK_HERE",
+  careers: "INSERT_FORMSPREE_LINK_HERE",
+  investors: "INSERT_FORMSPREE_LINK_HERE"
 };
 ```
 - Forms identify themselves via `data-formspree="business|careers|investors"` attribute
