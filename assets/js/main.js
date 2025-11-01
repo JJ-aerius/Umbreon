@@ -16,7 +16,7 @@ const SPEED_DATA = {
     { name: "Speed of sound (Mach 1)", mach: "1", speed: "≈ 1235 km/h", description: "Sea level, varies with altitude/temperature" },
     { name: "Subsonic", mach: "< 0.8", speed: "< 980 km/h", description: "Below the speed of sound" },
     { name: "Transonic", mach: "0.8–1.2", speed: "980–1470 km/h", description: "Near the speed of sound" },
-    { name: "Supersonic", mach: "1–5", speed: "1235–6125 km/h", description: "Faster than sound" },
+    { name: "Very Fast", mach: "1–5", speed: "1235–6125 km/h", description: "Faster than sound" },
     { name: "Hypersonic", mach: "5–10", speed: "6125–12,250 km/h", description: "Five times the speed of sound" },
     { name: "High Hypersonic", mach: "10–25", speed: "12,250–30,625 km/h", description: "Extremely high speeds" },
     { name: "Re-entry / Orbital", mach: "25+", speed: "> 30,000 km/h", description: "Orbital and re-entry speeds" }
@@ -34,7 +34,7 @@ const SPEED_DATA = {
     { name: "Subsonic", mach: "< 0.8", speed: "< 980 km/h" },
     { name: "Transonic", mach: "0.8–1.2", speed: "980–1470 km/h" },
     { 
-      name: "Supersonic", 
+      name: "Very Fast", 
       mach: "1–5", 
       speed: "1235–6125 km/h",
       examples: "Concorde (Mach 2.0 ≈ 2,450 km/h); SR-71 (Mach 3.2 ≈ 3,950 km/h)"
@@ -461,7 +461,7 @@ const SPEED_DATA = {
         />
         <div class="speed-result">
           <div class="speed-result-value"><span id="speed-value">1235</span> km/h</div>
-          <div class="speed-result-band" id="speed-band">Supersonic (Mach 1)</div>
+          <div class="speed-result-band" id="speed-band">Very Fast (Mach 1)</div>
           <div class="speed-result-mach" id="speed-mach">
             Approximate Mach 1.0 <span style="font-size: 0.85em;">(calculated at sea level; varies with conditions)</span>
           </div>
@@ -492,7 +492,7 @@ const SPEED_DATA = {
       } else if (speed < 1470) {
         band = 'Transonic';
       } else if (speed < 6125) {
-        band = 'Supersonic';
+        band = 'Very Fast';
       } else if (speed < 12250) {
         band = 'Hypersonic';
       } else if (speed < 30625) {

@@ -1,7 +1,7 @@
 # Copilot Instructions - Umbreon Website
 
 ## Project Overview
-Umbreon is a static website for Swiss-built supersonic drones, built with vanilla HTML, CSS, and JavaScript. The design follows a SpaceX/Rocket Lab-inspired aesthetic with a black background and cyan accent colors (`--accent: #0ea5e9`). **No frameworks, no build tools** — just modern web standards.
+Umbreon is a static website for Swiss-built very fast drones, built with vanilla HTML, CSS, and JavaScript. The design follows a SpaceX/Rocket Lab-inspired aesthetic with a black background and cyan accent colors (`--accent: #0ea5e9`). **No frameworks, no build tools** — just modern web standards.
 
 ## Architecture
 
