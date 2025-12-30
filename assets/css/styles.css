@@ -202,10 +202,11 @@ a:hover {
   text-transform: uppercase;
   display: flex;
   align-items: center;
+  margin-right: auto;
 }
 
 .logo-img {
-  height: 40px;
+  height: 90px;
   width: auto;
   display: block;
 }
