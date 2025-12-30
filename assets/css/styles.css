@@ -215,13 +215,16 @@ a:hover {
 }
 
 .nav-desktop {
-  display: none;
+  display: flex;
 }
 
 .nav-list {
   display: flex;
   gap: 2rem;
   align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-item {
@@ -237,6 +240,17 @@ a:hover {
   transition: color var(--transition);
   position: relative;
 }
+
+.nav-link,
+.nav-list a,
+.nav-dropdown-toggle {
+  color: white;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+    }
 
 .nav-link::after {
   content: '';
@@ -288,6 +302,7 @@ a:hover {
 
 .nav-submenu {
   position: absolute;
+  display: none;
   top: 100%;
   left: 0;
   background: var(--bg-2);
@@ -300,6 +315,7 @@ a:hover {
   transform: translateY(-10px);
   transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
   margin-top: 0.5rem;
+  list-style: none;
 }
 
 .nav-dropdown:hover .nav-submenu,
@@ -326,7 +342,7 @@ a:hover {
 
 /* Mobile Menu */
 .hamburger {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 5px;
   width: 28px;
@@ -334,15 +350,18 @@ a:hover {
   padding: 0;
   cursor: pointer;
   z-index: 1001;
+  background: none;
+  border: none;
 }
 
 .hamburger span {
   display: block;
-  width: 100%;
+  width: 25px;
   height: 3px;
-  background: var(--text);
+  background: white;
   border-radius: 2px;
   transition: transform var(--transition), opacity var(--transition);
+  margin: 5px 0;
 }
 
 .hamburger.active span:nth-child(1) {
