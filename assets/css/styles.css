@@ -342,7 +342,7 @@ a:hover {
 
 /* Mobile Menu */
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   width: 28px;
@@ -350,7 +350,6 @@ a:hover {
   padding: 0;
   cursor: pointer;
   z-index: 1001;
-  background: none;
   border: none;
 }
 
@@ -358,10 +357,8 @@ a:hover {
   display: block;
   width: 25px;
   height: 3px;
-  background: white;
   border-radius: 2px;
   transition: transform var(--transition), opacity var(--transition);
-  margin: 5px 0;
 }
 
 .hamburger.active span:nth-child(1) {
