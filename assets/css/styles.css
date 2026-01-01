@@ -1090,3 +1090,90 @@ body.nav-open {
   white-space: nowrap;
   border: 0;
 }
+
+
+
+/* ===== Project Status / Progress ===== */
+.project-status {
+  background: var(--bg);
+}
+
+.status-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  position: relative;
+  margin-top: 2rem;
+}
+
+/* Horizontal line behind steps */
+.status-bar::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+
+/* Individual step */
+.status-step {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Dot */
+.status-dot {
+  width: 14px;
+  height: 14px;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid var(--border);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Label */
+.status-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Completed steps */
+.status-step.completed .status-dot {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.status-step.completed .status-label {
+  color: var(--accent);
+}
+
+/* Responsive tweak */
+@media (max-width: 600px) {
+  .status-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .status-bar::before {
+    display: none;
+  }
+
+  .status-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .status-dot {
+    margin: 0;
+  }
+}
+
