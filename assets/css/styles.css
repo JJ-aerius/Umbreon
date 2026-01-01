@@ -302,7 +302,6 @@ a:hover {
 
 .nav-submenu {
   position: absolute;
-  display: none;
   top: 100%;
   left: 0;
   background: var(--bg-2);
@@ -310,11 +309,13 @@ a:hover {
   border-radius: var(--radius-sm);
   padding: 0.5rem 0;
   min-width: 180px;
+
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
-  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
-  margin-top: 0.5rem;
+  transition: opacity var(--transition),
+              transform var(--transition),
+              visibility var(--transition);
   list-style: none;
 }
 
